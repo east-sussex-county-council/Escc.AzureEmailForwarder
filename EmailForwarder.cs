@@ -42,15 +42,8 @@ namespace Escc.AzureEmailForwarder
         /// </summary>
         public void Start()
         {
-            try
-            {
-                Task.Factory.StartNew(async () => { await ProcessEmail(); },
-                  TaskCreationOptions.LongRunning);
-            }
-            catch (Exception ex)
-            {
-                Log(ex.Message, ex);
-            }
+            Task.Factory.StartNew(async () => { await ProcessEmail(); },
+              TaskCreationOptions.LongRunning);
         }
 
         /// <summary>
