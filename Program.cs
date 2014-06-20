@@ -18,7 +18,7 @@ namespace Escc.AzureEmailForwarder
                 new AzureBadMailTable(),
                 new AzureEmailToBlobSerialiser(new BinaryFormatter()),
                 new SmtpEmailSender(),
-                new List<ILogger>() { new ConsoleLogger(), new ExceptionlessLogger() });
+                new List<ILogger>() { new ConsoleLogger(), new ExceptionlessLogger(), new Log4NetLogger() });
             emailForwarder.Start();
 
             // Because the email forwarder creates async tasks, we need to wait for a synchronous event to stop the app from closing.
