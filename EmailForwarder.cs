@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Escc.Services;
 using Escc.Services.Azure;
-using Exceptionless;
 using Microsoft.WindowsAzure.Storage.Queue;
 using Microsoft.WindowsAzure.Storage.Table;
 
@@ -53,15 +52,23 @@ namespace Escc.AzureEmailForwarder
         /// <returns></returns>
         private async Task ProcessEmail()
         {
-            while (true)
+            try
             {
-                const int maxMessagesPerBatch = 32;
-                var queueMessages = await _queue.Queue.GetMessagesAsync(maxMessagesPerBatch);
-                var cloudQueueMessages = queueMessages as IList<CloudQueueMessage> ?? queueMessages.ToList();
-                if (cloudQueueMessages.Any())
+                while (true)
                 {
-                    await ProcessBatchOfQueuedEmails(_queue.Queue, cloudQueueMessages, _badMailTable.Table);
+                    const int maxMessagesPerBatch = 32;
+                    var queueMessages = await _queue.Queue.GetMessagesAsync(maxMessagesPerBatch);
+                    var cloudQueueMessages = queueMessages as IList<CloudQueueMessage> ?? queueMessages.ToList();
+                    if (cloudQueueMessages.Any())
+                    {
+                        await ProcessBatchOfQueuedEmails(_queue.Queue, cloudQueueMessages, _badMailTable.Table);
+                    }
                 }
+
+            }
+            catch (Exception ex)
+            {
+                Log(ex.Message, ex);
             }
         }
 
@@ -102,9 +109,11 @@ namespace Escc.AzureEmailForwarder
         {
             return Task.Factory.StartNew(() =>
             {
+                Uri blobUri = null;
+
                 try
                 {
-                    var blobUri = new Uri(queueMessage.AsString);
+                    blobUri = new Uri(queueMessage.AsString);
                     var blob = _blobSerialiser.ReadBlobFromUri(blobUri);
                     var email = _blobSerialiser.Deserialise(blob);
 
@@ -113,16 +122,20 @@ namespace Escc.AzureEmailForwarder
                     blob.Delete();
                     queue.DeleteMessage(queueMessage);
 
-                    Log("Sent email to " + email.To + " at " + DateTime.Now.ToShortDateString() + " " +
-                              DateTime.Now.ToShortTimeString());
+                    Log("Sent email to " + email.To);
                 }
                 catch (Exception ex)
                 {
                     // Report email processing errors and continue to next email.
                     // If the error occurs repeatedly the DequeueCount will increase and the message
                     // will be routed to ProcessBadMail.
-                    ex.ToExceptionless().Submit();
-                    Log(ex.Message, ex);
+                    var message = ex.Message;
+                    if (blobUri != null)
+                    {
+                        ex.Data.Add("Blob URI", blobUri.ToString());
+                        message += " " + blobUri.ToString();
+                    }
+                    Log(message, ex);
                 }
             });
         }
@@ -165,9 +178,8 @@ namespace Escc.AzureEmailForwarder
             {
                 // Make sure we're notified about any failure to save bad email. 
                 // If it's not deleted it will keep getting dequeued and run through this method.
-                ex.ToExceptionless().Submit();
-                Log(ex.Message, ex);
-                throw;
+                ex.Data.Add("Blob URI", queueMessage.AsString);
+                Log(ex.Message + " " + queueMessage.AsString, ex);
             }
 
             var error = "Error deserialising or sending email stored in blob: " + queueMessage.AsString +

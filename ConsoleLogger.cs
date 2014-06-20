@@ -14,7 +14,8 @@ namespace Escc.AzureEmailForwarder
         /// <param name="exception">The exception.</param>
         public void Log(string message = null, Exception exception = null)
         {
-            Console.WriteLine(message);
+            Console.WriteLine(DateTime.Now.ToShortDateString() + " " +
+                              DateTime.Now.ToShortTimeString() + ": " + message);
         }
     }
 }
