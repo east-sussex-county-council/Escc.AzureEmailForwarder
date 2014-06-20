@@ -92,9 +92,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.example.config" />
     <None Include="App.config" />
+    <None Include="LICENSE.md" />
     <None Include="packages.config" />
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Escc.Services.Azure\Escc.Services.Azure.csproj">
