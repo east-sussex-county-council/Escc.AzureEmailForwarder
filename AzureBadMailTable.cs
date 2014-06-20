@@ -25,7 +25,7 @@ namespace Escc.AzureEmailForwarder
             var storageAccount = config.EmailQueueStorageAccount;
             var tableClient = storageAccount.CreateCloudTableClient();
             var table = tableClient.GetTableReference("bademail");
-            table.CreateIfNotExists();
+            table.CreateIfNotExistsAsync().Wait();
             return table;
         }
 
