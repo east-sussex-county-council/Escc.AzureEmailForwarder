@@ -5,7 +5,9 @@ Windows Azure does not have a built-in SMTP service. One option is to serialise 
 
 The queuing code is adapted from the [Azure Friday series on queuing](http://channel9.msdn.com/Shows/Azure-Friday/Azure-Queues-101-Basics-of-Queues-with-Mark-Simms) (4 episodes) by Scott Hanselman and Mark Simms. 
 
-When you send an email using `AzureQueuedEmailSender` it serialises the email to a blob (to avoid any size limit for attachments), then stores the URL of the blob in a queue. This application runs on-premise with access to your own SMTP server. It watches the queue and either forwards emails and deletes them from the storage account or, if it fails for some reason, it moves the URL to table storage for manual processing, so that it does not keep reappearing on the queue or eventually expire from it. 
+When you send an email using `AzureQueuedEmailSender` it serialises the email to a blob (to avoid any size limit for attachments), then stores the URL of the blob in a queue. This application runs on-premise with access to your own SMTP server. It watches the queue and either forwards emails and deletes them from the storage account or, if it fails for some reason, it moves the URL to table storage for manual processing, so that it does not keep reappearing on the queue or eventually expire from it.
+
+We use [Exe2Srv](http://www.codeproject.com/Articles/715967/Running-Redis-as-a-Windows-Service) to run this application as a Windows Service. Exe2Srv and example configuration files are included in the Exe2Srv folder.
 
 We use [Log4Net](http://logging.apache.org/log4net/) and [Exceptionless](http://exceptionless.com/) for logging and error reporting, but you can substitute any `ILogger` implementation.
 

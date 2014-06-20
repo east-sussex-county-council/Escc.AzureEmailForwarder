@@ -122,7 +122,7 @@ namespace Escc.AzureEmailForwarder
                     blob.Delete();
                     queue.DeleteMessage(queueMessage);
 
-                    Log("Sent email to " + email.To);
+                    Log("Sent '" + email.Subject + "' to " + email.To);
                 }
                 catch (Exception ex)
                 {

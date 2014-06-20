@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Escc.Services.Azure", "..\E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Escc.Services", "..\Escc.Services\Escc.Services.csproj", "{76BBFA1E-2ACD-4173-B784-5B6C0ABE0CBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication2", "..\_Test\WebApplication2\WebApplication2.csproj", "{B08F0D6C-9AC4-4163-93A3-10E9E83C964F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{76BBFA1E-2ACD-4173-B784-5B6C0ABE0CBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76BBFA1E-2ACD-4173-B784-5B6C0ABE0CBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76BBFA1E-2ACD-4173-B784-5B6C0ABE0CBE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B08F0D6C-9AC4-4163-93A3-10E9E83C964F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B08F0D6C-9AC4-4163-93A3-10E9E83C964F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B08F0D6C-9AC4-4163-93A3-10E9E83C964F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B08F0D6C-9AC4-4163-93A3-10E9E83C964F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
