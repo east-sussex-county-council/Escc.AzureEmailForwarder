@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Escc.Services;
@@ -11,6 +10,9 @@ using Microsoft.WindowsAzure.Storage.Table;
 
 namespace Escc.AzureEmailForwarder
 {
+    /// <summary>
+    /// Gets email stored in Azure blobs and queues and sends it using SMTP
+    /// </summary>
     public class EmailForwarder
     {
         private readonly IEnumerable<ILogger> _loggers;
@@ -19,6 +21,14 @@ namespace Escc.AzureEmailForwarder
         private readonly AzureEmailToBlobSerialiser _blobSerialiser;
         private readonly IEmailSender _emailSender;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EmailForwarder"/> class.
+        /// </summary>
+        /// <param name="queue">The queue.</param>
+        /// <param name="badMailTable">The bad mail table.</param>
+        /// <param name="blobSerialiser">The email serialiser.</param>
+        /// <param name="emailSender">The email sender.</param>
+        /// <param name="loggers">The loggers.</param>
         public EmailForwarder(AzureEmailQueue queue, AzureBadMailTable badMailTable, AzureEmailToBlobSerialiser blobSerialiser, IEmailSender emailSender, IEnumerable<ILogger> loggers)
         {
             _queue = queue;
@@ -60,7 +70,7 @@ namespace Escc.AzureEmailForwarder
         /// </summary>
         /// <param name="queue">The queue.</param>
         /// <param name="queueMessages">The batch of emails.</param>
-        /// <param name="badMailTable">The badMailTable for storing emails that can't be processed.</param>
+        /// <param name="badMailTable">The table for storing emails that can't be processed.</param>
         /// <returns></returns>
         private async Task ProcessBatchOfQueuedEmails(CloudQueue queue, IEnumerable<CloudQueueMessage> queueMessages, CloudTable badMailTable)
         {
@@ -132,18 +142,18 @@ namespace Escc.AzureEmailForwarder
         /// </summary>
         /// <param name="queue">The queue.</param>
         /// <param name="queueMessage">The email message on the queue.</param>
-        /// <param name="badMailTable">The badMailTable for storing emails that can't be processed.</param>
+        /// <param name="badMailTable">The table for storing emails that can't be processed.</param>
         /// <returns></returns>
         private async Task ProcessBadMail(CloudQueue queue, CloudQueueMessage queueMessage, CloudTable badMailTable)
         {
-            // Store the email in an Azure badMailTable, with a RowKey as a unique id
+            // Store the email in an Azure table, with a RowKey as a unique id
             try
             {
                 var badEmail = new BadMail()
             {
                 PartitionKey = DateTime.UtcNow.ToString("yyyyMMdd"),
                 RowKey = Guid.NewGuid().ToString(),
-                Content = queueMessage.AsString
+                BlobUri = new Uri(queueMessage.AsString, UriKind.RelativeOrAbsolute)
             };
 
                 var tableOperation = TableOperation.Insert(badEmail);
@@ -161,7 +171,7 @@ namespace Escc.AzureEmailForwarder
             }
 
             var error = "Error deserialising or sending email stored in blob: " + queueMessage.AsString +
-                        ". This URI is also logged in the badmail badMailTable on Azure.";
+                        ". This URI is also logged in the badmail table on Azure.";
             Log(error, new BadMailException(error));
         }
 

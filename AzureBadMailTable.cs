@@ -22,7 +22,7 @@ namespace Escc.AzureEmailForwarder
         private static CloudTable CreateTable()
         {
             var config = new AzureServicesConfiguration();
-            var storageAccount = config.StorageAccount;
+            var storageAccount = config.EmailQueueStorageAccount;
             var tableClient = storageAccount.CreateCloudTableClient();
             var table = tableClient.GetTableReference("bademail");
             table.CreateIfNotExists();

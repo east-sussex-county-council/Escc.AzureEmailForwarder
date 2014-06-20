@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.WindowsAzure.Storage.Table;
 
 namespace Escc.AzureEmailForwarder
@@ -12,6 +8,12 @@ namespace Escc.AzureEmailForwarder
     /// </summary>
     public class BadMail : TableEntity
     {
-        public string Content { get; set; }
+        /// <summary>
+        /// Gets or sets the URI of the blob containing the email.
+        /// </summary>
+        /// <value>
+        /// The blob URI.
+        /// </value>
+        public Uri BlobUri { get; set; }
     }
 }
