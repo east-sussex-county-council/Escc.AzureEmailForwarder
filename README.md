@@ -19,7 +19,7 @@ We use [Log4Net](http://logging.apache.org/log4net/) and [Exceptionless](http://
 	var configuration = new ConfigurationServiceRegistry();
 	var cache = new HttpContextCacheStrategy();
 
-	var emailService = ServiceLocator.EmailService(configuration, cache);
+	var emailService = ServiceContainer<IEmailSender>.LoadService(configuration, cache);
 
     emailService.Send(email); 
 
@@ -28,14 +28,14 @@ We use [Log4Net](http://logging.apache.org/log4net/) and [Exceptionless](http://
 	<configuration>
 	  <configSections>
 	    <sectionGroup name="Escc.Services">
-	      <section name="ServiceLocator" type="System.Configuration.NameValueSectionHandler, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+	      <section name="ServiceRegistry" type="System.Configuration.NameValueSectionHandler, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
 	    </sectionGroup>
 	  </configSections>
 	  
 	  <Escc.Services>
-	    <ServiceLocator>
+	    <ServiceRegistry>
 	      <add key="Escc.Services.IEmailSender" value="Escc.Services.Azure.AzureQueuedEmailSender, Escc.Services.Azure" />
-	    </ServiceLocator>
+	    </ServiceRegistry>
 	  </Escc.Services>
 	
 	  <connectionStrings>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using Escc.Services;
 using Escc.Services.Azure;
+using Exceptionless;
 
 namespace Escc.AzureEmailForwarder
 {
@@ -13,6 +14,8 @@ namespace Escc.AzureEmailForwarder
     {
         static void Main(string[] args)
         {
+            ExceptionlessClient.Current.Startup(); 
+            
             var emailForwarder = new EmailForwarder(
                 new AzureEmailQueue(),
                 new AzureBadMailTable(),
@@ -20,6 +23,8 @@ namespace Escc.AzureEmailForwarder
                 new SmtpEmailSender(),
                 new List<ILogger>() { new ConsoleLogger(), new ExceptionlessLogger(), new Log4NetLogger() });
             emailForwarder.Start();
+
+            ExceptionlessClient.Current.ProcessQueue();
 
             // Because the email forwarder creates async tasks, we need to wait for a synchronous event to stop the app from closing.
             Console.ReadLine();
