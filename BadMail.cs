@@ -14,6 +14,8 @@ namespace Escc.AzureEmailForwarder
         /// <value>
         /// The blob URI.
         /// </value>
-        public Uri BlobUri { get; set; }
+        /// <remarks>This is a <see cref="string"/> rather than a <see cref="Uri"/> because that means it gets serialised to Azure table storage correctly.</remarks>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings")]
+        public string BlobUri { get; set; }
     }
 }

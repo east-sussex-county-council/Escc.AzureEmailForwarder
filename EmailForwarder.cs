@@ -166,7 +166,7 @@ namespace Escc.AzureEmailForwarder
             {
                 PartitionKey = DateTime.UtcNow.ToString("yyyyMMdd"),
                 RowKey = Guid.NewGuid().ToString(),
-                BlobUri = new Uri(queueMessage.AsString, UriKind.RelativeOrAbsolute)
+                BlobUri = queueMessage.AsString
             };
 
                 var tableOperation = TableOperation.Insert(badEmail);
