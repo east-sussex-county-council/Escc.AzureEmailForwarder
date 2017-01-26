@@ -4,6 +4,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using Escc.Services;
 using Escc.Services.Azure;
 using Exceptionless;
+using Modules.JsonNet;
 
 namespace Escc.AzureEmailForwarder
 {
@@ -19,7 +20,7 @@ namespace Escc.AzureEmailForwarder
             var emailForwarder = new EmailForwarder(
                 new AzureEmailQueue(),
                 new AzureBadMailTable(),
-                new AzureEmailToBlobSerialiser(new BinaryFormatter()),
+                new AzureEmailToBlobSerialiser(new JsonNetFormatter()),
                 new SmtpEmailSender(),
                 new List<ILogger>() { new ConsoleLogger(), new ExceptionlessLogger(), new Log4NetLogger() });
             emailForwarder.Start();

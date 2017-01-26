@@ -38,8 +38,9 @@
     <Reference Include="Escc.Services">
       <HintPath>packages\Escc.Services.3.0.0\lib\Escc.Services.dll</HintPath>
     </Reference>
-    <Reference Include="Escc.Services.Azure">
-      <HintPath>packages\Escc.Services.Azure.2.0.0\lib\Escc.Services.Azure.dll</HintPath>
+    <Reference Include="Escc.Services.Azure, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Escc.Services.Azure.2.1.0\lib\Escc.Services.Azure.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Exceptionless">
       <HintPath>packages\Exceptionless.1.5.2121\lib\net45\Exceptionless.dll</HintPath>
@@ -70,8 +71,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>packages\WindowsAzure.Storage.4.0.1\lib\net40\Microsoft.WindowsAzure.Storage.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="OrigoDb.JsonNetFormatter, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\OrigoDB.JsonNetFormatter.0.1.0\lib\net40\OrigoDb.JsonNetFormatter.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="S22.Mail">
       <HintPath>packages\S22.Mail.1.0.4668.31819\lib\net45\S22.Mail.dll</HintPath>
