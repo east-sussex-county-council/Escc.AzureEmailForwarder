@@ -114,15 +114,18 @@ namespace Escc.AzureEmailForwarder
                 try
                 {
                     blobUri = new Uri(queueMessage.AsString);
+                    Log("Dequeued blob URI " + blobUri);
                     var blob = _blobSerialiser.ReadBlobFromUri(blobUri);
                     var email = _blobSerialiser.Deserialise(blob);
 
+                    Log("Sending '" + email.Subject + "' to " + email.To);
                     _emailSender.Send(email);
 
+                    Log("Deleting blob " + blob.Name);
                     blob.Delete();
-                    queue.DeleteMessage(queueMessage);
 
-                    Log("Sent '" + email.Subject + "' to " + email.To);
+                    Log("Deleting message from queue " + queueMessage.AsString);
+                    queue.DeleteMessage(queueMessage);
                 }
                 catch (Exception ex)
                 {
