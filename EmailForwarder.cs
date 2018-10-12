@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Escc.Services;
 using Escc.Services.Azure;
+using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Queue;
 using Microsoft.WindowsAzure.Storage.Table;
+using Polly;
 
 namespace Escc.AzureEmailForwarder
 {
@@ -54,15 +56,25 @@ namespace Escc.AzureEmailForwarder
         {
             try
             {
+                const int maxMessagesPerBatch = 32;
+                const int maxRetryAttempts = 3;
+                var pauseBetweenFailures = TimeSpan.FromSeconds(5);
+
+                var retryPolicy = Policy
+                    .Handle<StorageException>()
+                    .WaitAndRetryAsync(maxRetryAttempts, i => pauseBetweenFailures);
+
                 while (true)
                 {
-                    const int maxMessagesPerBatch = 32;
-                    var queueMessages = await _queue.Queue.GetMessagesAsync(maxMessagesPerBatch);
-                    var cloudQueueMessages = queueMessages as IList<CloudQueueMessage> ?? queueMessages.ToList();
-                    if (cloudQueueMessages.Any())
+                    await retryPolicy.ExecuteAsync(async () =>
                     {
-                        await ProcessBatchOfQueuedEmails(_queue.Queue, cloudQueueMessages, _badMailTable.Table);
-                    }
+                        var queueMessages = await _queue.Queue.GetMessagesAsync(maxMessagesPerBatch);
+                        var cloudQueueMessages = queueMessages as IList<CloudQueueMessage> ?? queueMessages.ToList();
+                        if (cloudQueueMessages.Any())
+                        {
+                            await ProcessBatchOfQueuedEmails(_queue.Queue, cloudQueueMessages, _badMailTable.Table);
+                        }
+                    });
                 }
 
             }

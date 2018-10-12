@@ -64,16 +64,20 @@ We use [Log4Net](http://logging.apache.org/log4net/) and [Exceptionless](http://
 	  </system.net>
 
 	  <log4net>
-	    <appender name="FileAppender" type="log4net.Appender.FileAppender">
-	      <file value="log.txt"/>
-	      <appendToFile value="true"/>
-	      <layout type="log4net.Layout.PatternLayout">
-	        <conversionPattern value="%date %-5level %logger - %message%newline"/>
-	      </layout>
-	    </appender>
-	    <root>
-	      <appender-ref ref="FileAppender"/>
-	    </root>
+	     <appender name="rollingFile" type="log4net.Appender.RollingFileAppender">
+		     <file type="log4net.Util.PatternString" value="Logs\log.txt" />
+		     <lockingModel type="log4net.Appender.FileAppender+MinimalLock" />
+		     <appendToFile value="true" />
+		     <rollingStyle value="Date" />
+		     <maximumFileSize value="5MB" />
+		     <layout type="log4net.Layout.PatternLayout">
+		        <conversionPattern value="%date %-5level %logger - %message%newline" />
+		     </layout>
+		     <encoding value="utf-8" />
+		 </appender>
+		 <root>
+		     <appender-ref ref="rollingFile"/>
+		 </root>
 	  </log4net>
 	
 	  <exceptionless apiKey="project API key" serverUrl="Exceptionless server URL" />	
