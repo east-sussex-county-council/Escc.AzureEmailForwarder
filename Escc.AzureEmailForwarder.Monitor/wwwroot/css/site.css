@@ -1,0 +1,13 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
+for details on configuring this project to bundle and minify static web assets. */
+body {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.deleted td { text-decoration: line-through; }
+.error td { color: red; }
+.sent td { color: green; }
+
+td.actions { white-space: nowrap; }
+.btn { margin: 0 10px 0 0; }

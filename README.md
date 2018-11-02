@@ -44,3 +44,12 @@ We use [Log4Net](http://logging.apache.org/log4net/) and [Exceptionless](http://
 	</configuration>
 
 For **app.config** for Escc.AzureEmailForwarder, see [app.example.config](Escc.AzureEmailForwarder\App.example.config).
+
+## Escc.AzureEmailForwarder.Monitor
+
+This .NET Core web application lets you monitor the blobs in the storage account. This is useful when there is a problem and emails fail to send. You can view and send the failed emails, or delete the blob if the email is no longer relevant.
+
+The application is a first draft and lacks user security, so it should only deployed if security is configured at the web server level. It also lacks management of the `badmail` table, looking instead directly at blob storage. This means that:
+
+* you need manually to check the date of the email as, if it's very recent, it may still be about to be processed automatically
+* if you click 'send' or 'delete', the blob is deleted but the corresponding record in the `badmail` table needs to be deleted manually 

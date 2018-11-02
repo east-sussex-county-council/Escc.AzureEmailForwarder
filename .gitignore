@@ -32,3 +32,6 @@ _ReSharper*/
 [Ss]cripts*/
 packages/
 .vs
+*.pubxml
+launchSettings.json
+appsettings.*.json

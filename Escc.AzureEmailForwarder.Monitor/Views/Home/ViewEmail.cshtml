@@ -1,0 +1,51 @@
+﻿@model FailedEmailViewModel
+@{
+    var UkCulture = new System.Globalization.CultureInfo("en-GB");
+    ViewData["Title"] = Model.FailedEmail.Subject + " at " + Model.DateCreated.ToString("dd MMM yyyy, h.mmtt", UkCulture);
+}
+
+<h1>@Model.FailedEmail.Subject</h1>
+
+<table class="table">
+    <tr>
+        <th>From</th>
+        <td>@Model.FailedEmail.From.Address</td>
+    </tr>
+    <tr>
+        <th>To</th>
+        <td>
+            @foreach (var to in Model.FailedEmail.To)
+            {
+                @to.Address<br />
+            }
+        </td>
+    </tr>
+    <tr>
+        <th>CC</th>
+        <td>
+            @foreach (var cc in Model.FailedEmail.CC)
+            {
+                @cc.Address<br />
+            }
+        </td>
+    </tr>
+    <tr>
+        <th>BCC</th>
+        <td>
+            @foreach (var bcc in Model.FailedEmail.Bcc)
+            {
+                @bcc.Address<br />
+            }
+        </td>
+    </tr>
+    <tr>
+        <th>Subject</th>
+        <td>@Model.FailedEmail.Subject</td>
+    </tr>
+    <tr><th>Date</th><td>@Model.DateCreated.ToString("dd MMM yyyy, h.mmtt", UkCulture)</td></tr>
+    <tr><td colspan="2">@Html.Raw(Model.FailedEmail.Body)</td></tr>
+</table>
+<a href="@Url.Content("~/")" class="btn btn-info">Back to list</a>
+<button class="send btn btn-primary" data-blob="@Model.BlobName">Send</button>
+<button class="delete btn btn-danger" data-blob="@Model.BlobName">Delete</button>
+
