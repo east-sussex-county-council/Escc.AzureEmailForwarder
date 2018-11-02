@@ -43,42 +43,4 @@ We use [Log4Net](http://logging.apache.org/log4net/) and [Exceptionless](http://
 	  </connectionStrings>
 	</configuration>
 
-**app.config** for Escc.AzureEmailForwarder
-
-	<configuration>
-	  <configSections>
-	    <section name="exceptionless" type="Exceptionless.Configuration.ExceptionlessSection, Exceptionless" />
-	    <section name="log4net" type="log4net.Config.Log4NetConfigurationSectionHandler, log4net"/>
-	  </configSections>
-
-	  <connectionStrings>
-	    <add name="Escc.Services.Azure.EmailQueue" connectionString="UseDevelopmentStorage=true"/>
-	  </connectionStrings>
-	
-	 <system.net>
-	    <mailSettings>
-	      <smtp>
-	        <network host="IP of SMTP server" />
-	      </smtp>
-	    </mailSettings>
-	  </system.net>
-
-	  <log4net>
-	     <appender name="rollingFile" type="log4net.Appender.RollingFileAppender">
-		     <file type="log4net.Util.PatternString" value="Logs\log.txt" />
-		     <lockingModel type="log4net.Appender.FileAppender+MinimalLock" />
-		     <appendToFile value="true" />
-		     <rollingStyle value="Date" />
-		     <maximumFileSize value="5MB" />
-		     <layout type="log4net.Layout.PatternLayout">
-		        <conversionPattern value="%date %-5level %logger - %message%newline" />
-		     </layout>
-		     <encoding value="utf-8" />
-		 </appender>
-		 <root>
-		     <appender-ref ref="rollingFile"/>
-		 </root>
-	  </log4net>
-	
-	  <exceptionless apiKey="project API key" serverUrl="Exceptionless server URL" />	
-	</configuration>
+For **app.config** for Escc.AzureEmailForwarder, see [app.example.config](Escc.AzureEmailForwarder\App.example.config).

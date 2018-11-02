@@ -36,56 +36,56 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Escc.Services">
-      <HintPath>packages\Escc.Services.3.0.0\lib\Escc.Services.dll</HintPath>
+      <HintPath>..\packages\Escc.Services.3.0.0\lib\Escc.Services.dll</HintPath>
     </Reference>
     <Reference Include="Escc.Services.Azure, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Escc.Services.Azure.2.1.0\lib\Escc.Services.Azure.dll</HintPath>
+      <HintPath>..\packages\Escc.Services.Azure.2.1.0\lib\Escc.Services.Azure.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Exceptionless">
-      <HintPath>packages\Exceptionless.1.5.2121\lib\net45\Exceptionless.dll</HintPath>
+      <HintPath>..\packages\Exceptionless.1.5.2121\lib\net45\Exceptionless.dll</HintPath>
     </Reference>
     <Reference Include="Exceptionless.Models">
-      <HintPath>packages\Exceptionless.1.5.2121\lib\net45\Exceptionless.Models.dll</HintPath>
+      <HintPath>..\packages\Exceptionless.1.5.2121\lib\net45\Exceptionless.Models.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
-      <HintPath>packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Data.Edm, Version=5.8.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Data.Edm.5.8.4\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+      <HintPath>..\packages\Microsoft.Data.Edm.5.8.4\lib\net40\Microsoft.Data.Edm.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Data.OData, Version=5.8.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Data.OData.5.8.4\lib\net40\Microsoft.Data.OData.dll</HintPath>
+      <HintPath>..\packages\Microsoft.Data.OData.5.8.4\lib\net40\Microsoft.Data.OData.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Data.Services.Client, Version=5.8.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Data.Services.Client.5.8.4\lib\net40\Microsoft.Data.Services.Client.dll</HintPath>
+      <HintPath>..\packages\Microsoft.Data.Services.Client.5.8.4\lib\net40\Microsoft.Data.Services.Client.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.WindowsAzure.Configuration, Version=1.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\Microsoft.WindowsAzure.ConfigurationManager.1.8.0.0\lib\net35-full\Microsoft.WindowsAzure.Configuration.dll</HintPath>
+      <HintPath>..\packages\Microsoft.WindowsAzure.ConfigurationManager.1.8.0.0\lib\net35-full\Microsoft.WindowsAzure.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.WindowsAzure.Storage, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\WindowsAzure.Storage.4.0.1\lib\net40\Microsoft.WindowsAzure.Storage.dll</HintPath>
+      <HintPath>..\packages\WindowsAzure.Storage.4.0.1\lib\net40\Microsoft.WindowsAzure.Storage.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="OrigoDb.JsonNetFormatter, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\OrigoDB.JsonNetFormatter.0.1.0\lib\net40\OrigoDb.JsonNetFormatter.dll</HintPath>
+      <HintPath>..\packages\OrigoDB.JsonNetFormatter.0.1.0\lib\net40\OrigoDb.JsonNetFormatter.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Polly, Version=6.0.0.0, Culture=neutral, PublicKeyToken=c8a3ffc3f8f825cc, processorArchitecture=MSIL">
-      <HintPath>packages\Polly.6.1.0\lib\netstandard2.0\Polly.dll</HintPath>
+      <HintPath>..\packages\Polly.6.1.0\lib\netstandard2.0\Polly.dll</HintPath>
     </Reference>
     <Reference Include="S22.Mail">
-      <HintPath>packages\S22.Mail.1.0.4668.31819\lib\net45\S22.Mail.dll</HintPath>
+      <HintPath>..\packages\S22.Mail.1.0.4668.31819\lib\net45\S22.Mail.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Spatial, Version=5.8.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\System.Spatial.5.8.4\lib\net40\System.Spatial.dll</HintPath>
+      <HintPath>..\packages\System.Spatial.5.8.4\lib\net40\System.Spatial.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -107,15 +107,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="App.example.config" />
     <None Include="Exe2Srv\Exe2Srvc.exe.config" />
     <None Include="Exe2Srv\Install.bat" />
     <None Include="Exe2Srv\Uninstall.bat" />
-    <None Include="LICENSE.md" />
     <None Include="packages.config" />
-    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include=".gitignore" />
     <Content Include="Exe2Srv\Exe2Srvc.exe" />
   </ItemGroup>
   <ItemGroup />
